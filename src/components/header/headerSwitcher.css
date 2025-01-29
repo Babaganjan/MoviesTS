@@ -1,0 +1,47 @@
+.switcher-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+.switcher {
+  display: flex;
+  align-self: center;
+  gap: 16px;
+  margin-bottom: 19px;
+  box-shadow: 0px -1px 0px 0px rgba(0, 0, 0, 0.09) inset;
+  position: relative;
+}
+
+.switcher-button {
+  border: 0;
+  padding: 10px 9px;
+  color: rgba(0, 0, 0, 0.65);
+  background-color: transparent;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 157.143%;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.switcher-button.active {
+  color: #007bff;
+}
+
+.slider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  height: 2px;
+  background-color: #007bff;
+  transition: left 0.3s ease;
+}
+
+.slider.search {
+  left: 0;
+}
+
+.slider.rated {
+  left: 50%;
+}

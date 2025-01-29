@@ -1,0 +1,31 @@
+.input-field {
+  position: relative;
+}
+
+.search-movie {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  font-family: "Inter UI";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 137.5%;
+}
+
+.search-movie:focus {
+  outline: 1px solid #0ccd16;
+}
+.search-movie:hover {
+  outline: 1px solid #3794f2;
+}
+
+input::placeholder {
+  color: var(--disabled-color, rgba(0, 0, 0, 0.25));
+}
+
+.error {
+  position: absolute;
+  left: 22%;
+  bottom: -100%;
+}
