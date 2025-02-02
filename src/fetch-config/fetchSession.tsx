@@ -1,17 +1,18 @@
 // fetchSession.tsx;
 const fetchSession = async (): Promise<string> => {
   const token = import.meta.env.VITE_API_TOKEN;
-  localStorage.setItem('apiKey', token);
 
-  if (!token) {
-    return null as unknown as string;
+  if (!localStorage.getItem('apiToken')) {
+    localStorage.setItem('apiToken', token);
   }
+
+  const apiToken = localStorage.getItem('apiToken');
 
   const options: RequestInit = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('apiKey')}`,
+      Authorization: `Bearer ${apiToken}`,
     },
   };
 
