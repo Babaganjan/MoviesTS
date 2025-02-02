@@ -84,11 +84,18 @@ const MovieItem: React.FC<MovieItemProps> = ({
 
     if (!checkIfRated()) {
       if (guestSessionId) {
+        const apiToken = localStorage.getItem('apiToken');
+
+        if (!apiToken) {
+          // eslint-disable-next-line no-console
+          console.error('Токен API не найден. Пожалуйста, проверьте конфигурацию.');
+          return;
+        }
         const options = {
           method: 'POST',
           headers: {
             accept: 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('apiKey')}`,
+            Authorization: `Bearer ${apiToken}`,
             'Content-Type': 'application/json',
           },
 

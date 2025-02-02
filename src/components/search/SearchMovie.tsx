@@ -28,11 +28,19 @@ const SearchMovie: React.FC = () => {
 
   useEffect(() => {
     const fetchGenres = async () => {
+      const apiToken = localStorage.getItem('apiToken');
+
+      if (!apiToken) {
+        // eslint-disable-next-line no-console
+        console.error('Токен API не найден. Пожалуйста, проверьте конфигурацию.');
+        return;
+      }
+
       const options: RequestInit = {
         method: 'GET',
         headers: {
           accept: 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('apiKey')}`,
+          Authorization: `Bearer ${apiToken}`,
         },
       };
 
@@ -64,11 +72,19 @@ const SearchMovie: React.FC = () => {
   const fetchData = async (query: string) => {
     if (query) {
       setLoading(true);
+      const apiToken = localStorage.getItem('apiToken');
+
+      if (!apiToken) {
+        // eslint-disable-next-line no-console
+        console.error('Токен API не найден. Пожалуйста, проверьте конфигурацию.');
+        return;
+      }
+
       const options: RequestInit = {
         method: 'GET',
         headers: {
           accept: 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('apiKey')}`,
+          Authorization: `Bearer ${apiToken}`,
         },
       };
 

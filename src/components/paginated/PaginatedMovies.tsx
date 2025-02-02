@@ -46,13 +46,21 @@ const PaginatedMovies: React.FC<PaginatedMoviesProps> = ({ tabType }) => {
 
   const fetchMovies = useCallback(async (searchQuery: string, page: number) => {
     try {
+      const apiToken = localStorage.getItem('apiToken');
+
+      if (!apiToken) {
+        // eslint-disable-next-line no-console
+        console.error('Токен API не найден. Пожалуйста, проверьте конфигурацию.');
+        return;
+      }
+
       const response = await fetch(
         `https://api.themoviedb.org/3/search/movie?query=${searchQuery}&page=${page}`,
         {
           method: 'GET',
           headers: {
             accept: 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('apiKey')}`,
+            Authorization: `Bearer ${apiToken}`,
           },
         },
       );
