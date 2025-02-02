@@ -1,8 +1,8 @@
 // fetchSession.tsx;
 
-const apiToken = import.meta.env.VITE_API_TOKEN;
-
 const fetchSession = async (): Promise<string> => {
+  const apiToken = import.meta.env.VITE_API_TOKEN;
+
   const options: RequestInit = {
     method: 'GET',
     headers: {
