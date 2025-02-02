@@ -32,8 +32,7 @@ const SearchMovie: React.FC = () => {
         method: 'GET',
         headers: {
           accept: 'application/json',
-          Authorization:
-              'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwNWY4NzcwNWNlYzYyZTA4YWNjZmY2NTRjMjJjZmJmZSIsIm5iZiI6MTczNjA2NjM0My4yODcwMDAyLCJzdWIiOiI2NzdhNDUyNzgyY2NlMTVhNzY3NGViOTciLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.IlVjxE4hOBNTPyyuWZQx2hOZB9DWHSmZFMcLveFZ8AU', // Ваш API токен
+          Authorization: `Bearer ${localStorage.getItem('apiKey')}`,
         },
       };
 
@@ -69,8 +68,7 @@ const SearchMovie: React.FC = () => {
         method: 'GET',
         headers: {
           accept: 'application/json',
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwNWY4NzcwNWNlYzYyZTA4YWNjZmY2NTRjMjJjZmJmZSIsIm5iZiI6MTczNjA2NjM0My4yODcwMDAyLCJzdWIiOiI2NzdhNDUyNzgyY2NlMTVhNzY3NGViOTciLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.IlVjxE4hOBNTPyyuWZQx2hOZB9DWHSmZFMcLveFZ8AU',
+          Authorization: `Bearer ${localStorage.getItem('apiKey')}`,
         },
       };
 

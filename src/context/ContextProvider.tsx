@@ -43,6 +43,8 @@ export interface ContextValues {
   setLoading: (loading: boolean) => void;
   error: Error | null;
   setError: (error: Error | null) => void;
+  currentPage: number;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
 interface ContextProviderProps {
@@ -59,6 +61,15 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
   const [activeOption, setActiveOption] = useState<string>('search');
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
+  const [currentPage, setCurrentPage] = useState<number>(() => {
+    const savedPage = localStorage.getItem('localStorageKey');
+    return savedPage ? JSON.parse(savedPage) : 1; // Проверка savedPage
+  });
+
+  // Сохранение значения новой страницы в localStorage
+  useEffect(() => {
+    localStorage.setItem('localStorageKey', JSON.stringify(currentPage));
+  }, [currentPage]);
 
   useEffect(() => {
     const createGuestSession = async () => {
@@ -89,6 +100,8 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
     setLoading,
     error,
     setError,
+    currentPage,
+    setCurrentPage,
   };
 
   return (

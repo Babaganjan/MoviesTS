@@ -1,4 +1,4 @@
-// // MovieItem.tsx
+// MovieItem.tsx
 import React, {
   useContext, useState, useEffect, useCallback,
 } from 'react';
@@ -88,8 +88,7 @@ const MovieItem: React.FC<MovieItemProps> = ({
           method: 'POST',
           headers: {
             accept: 'application/json',
-            Authorization:
-              'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwNWY4NzcwNWNlYzYyZTA4YWNjZmY2NTRjMjJjZmJmZSIsIm5iZiI6MTczNjA2NjM0My4yODcwMDAyLCJzdWIiOiI2NzdhNDUyNzgyY2NlMTVhNzY3NGViOTciLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.IlVjxE4hOBNTPyyuWZQx2hOZB9DWHSmZFMcLveFZ8AU',
+            Authorization: `Bearer ${localStorage.getItem('apiKey')}`,
             'Content-Type': 'application/json',
           },
 
@@ -151,8 +150,11 @@ const MovieItem: React.FC<MovieItemProps> = ({
 
   return (
     <li className="movie-item">
-      <img className="poster" src={imageUrl} alt={title} />
+      <img className="poster poster-big-hidden" src={imageUrl} alt={title} />
       <div className="movie-content">
+      <div className='movie-layout-mobil'>
+      <img className="poster-hidden" src={imageUrl} alt={title} />
+        <div className='movie-item-mobil'>
         <div className="wrapper-title">
           <h2 className="title">{title}</h2>
           <span className={`rating ${ratingClass}`}>
@@ -167,6 +169,9 @@ const MovieItem: React.FC<MovieItemProps> = ({
             </span>
           ))}
         </div>
+        </div>
+      </div>
+        <div className='movie-desc-block'>
         <p className="movie-desc">{descPrev}</p>
         <Rate
           count={10}
@@ -174,6 +179,7 @@ const MovieItem: React.FC<MovieItemProps> = ({
           onChange={handleRatingChange}
           disabled={isRated}
         />
+        </div>
       </div>
     </li>
   );

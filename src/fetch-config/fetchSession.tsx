@@ -1,11 +1,17 @@
 // fetchSession.tsx;
 const fetchSession = async (): Promise<string> => {
+  const token = import.meta.env.VITE_API_TOKEN;
+  localStorage.setItem('apiKey', token);
+
+  if (!token) {
+    return null as unknown as string;
+  }
+
   const options: RequestInit = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization:
-        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwNWY4NzcwNWNlYzYyZTA4YWNjZmY2NTRjMjJjZmJmZSIsIm5iZiI6MTczNjA2NjM0My4yODcwMDAyLCJzdWIiOiI2NzdhNDUyNzgyY2NlMTVhNzY3NGViOTciLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.IlVjxE4hOBNTPyyuWZQx2hOZB9DWHSmZFMcLveFZ8AU',
+      Authorization: `Bearer ${localStorage.getItem('apiKey')}`,
     },
   };
 

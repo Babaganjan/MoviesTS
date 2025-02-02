@@ -1,8 +1,8 @@
 // // RatedComponent.tsx
 import React, { useContext } from 'react';
 import ContextWrapper from '../../context/ContextWrapper';
-import { ContextValues } from '../../context/ContextProvider';
 import MovieItem from '../movieItem/MovieItem';
+import { PAGE_SIZE } from '../movieList/MoviesList';
 
 // Определяем интерфейс для фильма в ratedMovies
 interface RatedMovie {
@@ -16,13 +16,21 @@ interface RatedMovie {
 }
 
 const RatedComponent: React.FC = () => {
-  const { ratedMovies } = useContext(ContextWrapper) as ContextValues;
+  const {
+    ratedMovies,
+    currentPage,
+  } = useContext(ContextWrapper) as {
+    ratedMovies: RatedMovie[];
+    currentPage: number;
+  };
+
+  const currentMovies = ratedMovies.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
 
   return (
-    <div className="rated-movies">
+    <main className="rated-movies">
       <ul className="movies-list">
         {ratedMovies.length > 0 ? (
-          ratedMovies.map((movie: RatedMovie) => (
+          currentMovies.map((movie: RatedMovie) => (
             <MovieItem
               key={movie.movieId}
               title={movie.title}
@@ -39,7 +47,7 @@ const RatedComponent: React.FC = () => {
           <p>No movies found</p>
         )}
       </ul>
-    </div>
+    </main>
   );
 };
 

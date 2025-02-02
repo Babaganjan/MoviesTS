@@ -1,6 +1,6 @@
 .movies-list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 37px;
   margin: 0;
   padding: 32px 0;
@@ -14,4 +14,10 @@
   top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+@media (min-width: 1010px) {
+  .movies-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
