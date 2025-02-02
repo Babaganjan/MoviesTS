@@ -28,22 +28,17 @@ const SearchMovie: React.FC = () => {
 
   useEffect(() => {
     const fetchGenres = async () => {
-      const apiToken = import.meta.env.VITE_API_TOKEN;
+      const token = localStorage.getItem('apiToken');
 
-      if (!localStorage.getItem('apiToken')) {
-        localStorage.setItem('apiToken', apiToken);
-      }
-
-      // Проверяем, установлен ли токен
-      if (!apiToken) {
-        throw new Error('Токен недоступен: проверьте .env файл или переменные окружения');
+      if (!token) {
+        throw new Error('Токен не найден в localStorage. Пожалуйста, проверьте, был ли он установлен.');
       }
 
       const options: RequestInit = {
         method: 'GET',
         headers: {
           accept: 'application/json',
-          Authorization: `Bearer ${apiToken}`,
+          Authorization: `Bearer ${token}`,
         },
       };
 
@@ -76,22 +71,17 @@ const SearchMovie: React.FC = () => {
     if (query) {
       setLoading(true);
 
-      const apiToken = import.meta.env.VITE_API_TOKEN;
+      const token = localStorage.getItem('apiToken');
 
-      if (!localStorage.getItem('apiToken')) {
-        localStorage.setItem('apiToken', apiToken);
-      }
-
-      // Проверяем, установлен ли токен
-      if (!apiToken) {
-        throw new Error('Токен недоступен: проверьте .env файл или переменные окружения');
+      if (!token) {
+        throw new Error('Токен не найден в localStorage. Пожалуйста, проверьте, был ли он установлен.');
       }
 
       const options: RequestInit = {
         method: 'GET',
         headers: {
           accept: 'application/json',
-          Authorization: `Bearer ${apiToken}`,
+          Authorization: `Bearer ${token}`,
         },
       };
 

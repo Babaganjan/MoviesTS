@@ -2,20 +2,20 @@
 const fetchSession = async (): Promise<string> => {
   const apiToken = import.meta.env.VITE_API_TOKEN;
 
-  if (!localStorage.getItem('apiToken')) {
-    localStorage.setItem('apiToken', apiToken);
+  // Проверка наличия токена в localStorage
+  const storedToken = localStorage.getItem('apiToken');
+  if (!storedToken && apiToken) {
+    localStorage.setItem('apiToken', apiToken); // Сохраните токен в localStorage, если его еще нет
   }
 
-  // Проверяем, установлен ли токен
-  if (!apiToken) {
-    throw new Error('Токен недоступен: проверьте .env файл или переменные окружения');
-  }
+  // Используйте токен из localStorage для запроса
+  const tokenToUse = storedToken || apiToken;
 
   const options: RequestInit = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: `Bearer ${apiToken}`,
+      Authorization: `Bearer ${tokenToUse}`,
     },
   };
 
