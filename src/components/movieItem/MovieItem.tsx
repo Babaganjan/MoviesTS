@@ -84,13 +84,17 @@ const MovieItem: React.FC<MovieItemProps> = ({
 
     if (!checkIfRated()) {
       if (guestSessionId) {
-        const apiToken = localStorage.getItem('apiToken');
+        const apiToken = import.meta.env.VITE_API_TOKEN;
 
-        if (!apiToken) {
-          // eslint-disable-next-line no-console
-          console.error('Токен API не найден. Пожалуйста, проверьте конфигурацию.');
-          return;
+        if (!localStorage.getItem('apiToken')) {
+          localStorage.setItem('apiToken', apiToken);
         }
+
+        // Проверяем, установлен ли токен
+        if (!apiToken) {
+          throw new Error('Токен недоступен: проверьте .env файл или переменные окружения');
+        }
+
         const options = {
           method: 'POST',
           headers: {

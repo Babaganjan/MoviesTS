@@ -78,6 +78,7 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
         setGuestSessionId(sessionId);
       }
     };
+
     createGuestSession();
   }, []);
 

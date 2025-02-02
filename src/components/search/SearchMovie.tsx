@@ -28,12 +28,15 @@ const SearchMovie: React.FC = () => {
 
   useEffect(() => {
     const fetchGenres = async () => {
-      const apiToken = localStorage.getItem('apiToken');
+      const apiToken = import.meta.env.VITE_API_TOKEN;
 
+      if (!localStorage.getItem('apiToken')) {
+        localStorage.setItem('apiToken', apiToken);
+      }
+
+      // Проверяем, установлен ли токен
       if (!apiToken) {
-        // eslint-disable-next-line no-console
-        console.error('Токен API не найден. Пожалуйста, проверьте конфигурацию.');
-        return;
+        throw new Error('Токен недоступен: проверьте .env файл или переменные окружения');
       }
 
       const options: RequestInit = {
@@ -72,12 +75,16 @@ const SearchMovie: React.FC = () => {
   const fetchData = async (query: string) => {
     if (query) {
       setLoading(true);
-      const apiToken = localStorage.getItem('apiToken');
 
+      const apiToken = import.meta.env.VITE_API_TOKEN;
+
+      if (!localStorage.getItem('apiToken')) {
+        localStorage.setItem('apiToken', apiToken);
+      }
+
+      // Проверяем, установлен ли токен
       if (!apiToken) {
-        // eslint-disable-next-line no-console
-        console.error('Токен API не найден. Пожалуйста, проверьте конфигурацию.');
-        return;
+        throw new Error('Токен недоступен: проверьте .env файл или переменные окружения');
       }
 
       const options: RequestInit = {

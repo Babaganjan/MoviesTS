@@ -46,12 +46,15 @@ const PaginatedMovies: React.FC<PaginatedMoviesProps> = ({ tabType }) => {
 
   const fetchMovies = useCallback(async (searchQuery: string, page: number) => {
     try {
-      const apiToken = localStorage.getItem('apiToken');
+      const apiToken = import.meta.env.VITE_API_TOKEN;
 
+      if (!localStorage.getItem('apiToken')) {
+        localStorage.setItem('apiToken', apiToken);
+      }
+
+      // Проверяем, установлен ли токен
       if (!apiToken) {
-        // eslint-disable-next-line no-console
-        console.error('Токен API не найден. Пожалуйста, проверьте конфигурацию.');
-        return;
+        throw new Error('Токен недоступен: проверьте .env файл или переменные окружения');
       }
 
       const response = await fetch(

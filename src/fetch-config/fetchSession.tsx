@@ -1,12 +1,15 @@
 // fetchSession.tsx;
 const fetchSession = async (): Promise<string> => {
-  const token = import.meta.env.VITE_API_TOKEN;
+  const apiToken = import.meta.env.VITE_API_TOKEN;
 
   if (!localStorage.getItem('apiToken')) {
-    localStorage.setItem('apiToken', token);
+    localStorage.setItem('apiToken', apiToken);
   }
 
-  const apiToken = localStorage.getItem('apiToken');
+  // Проверяем, установлен ли токен
+  if (!apiToken) {
+    throw new Error('Токен недоступен: проверьте .env файл или переменные окружения');
+  }
 
   const options: RequestInit = {
     method: 'GET',
