@@ -36,7 +36,6 @@ const PaginatedMovies: React.FC<PaginatedMoviesProps> = ({ tabType }) => {
   useEffect(() => {
     const savedPage = localStorage.getItem(localStorageKey);
     if (savedPage) {
-      // Если есть сохраненная страница, устанавливаем текущую страницу в сохраненную
       setCurrentPage(JSON.parse(savedPage));
     } else if (tabType === 'rated') {
       // Если вкладка "Rated", сбрасываем на 1
