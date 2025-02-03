@@ -28,17 +28,14 @@ const SearchMovie: React.FC = () => {
 
   useEffect(() => {
     const fetchGenres = async () => {
-      const token = localStorage.getItem('apiToken');
-
-      if (!token) {
-        throw new Error('Токен не найден в localStorage. Пожалуйста, проверьте, был ли он установлен.');
-      }
+      const apiToken = import.meta.env.VITE_API_TOKEN;
+      localStorage.setItem('apiToken', apiToken);
 
       const options: RequestInit = {
         method: 'GET',
         headers: {
           accept: 'application/json',
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${apiToken}`,
         },
       };
 

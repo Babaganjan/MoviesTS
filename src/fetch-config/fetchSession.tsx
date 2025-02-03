@@ -1,13 +1,17 @@
 // fetchSession.tsx;
 
 const fetchSession = async (): Promise<string> => {
-  const apiToken = import.meta.env.VITE_API_TOKEN;
+  const token = localStorage.getItem('apiToken');
+
+  if (!token) {
+    throw new Error('Токен не найден в localStorage. Пожалуйста, проверьте, был ли он установлен.');
+  }
 
   const options: RequestInit = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: `Bearer ${apiToken}`,
+      Authorization: `Bearer ${token}`,
     },
   };
 
@@ -27,7 +31,6 @@ const fetchSession = async (): Promise<string> => {
 
     if (data.success) {
       if (data.guest_session_id) {
-        localStorage.setItem('apiToken', apiToken);
         return data.guest_session_id;
       }
       throw new Error('Гостевая сессия не была создана.');
