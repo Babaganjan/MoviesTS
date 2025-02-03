@@ -1,13 +1,21 @@
 // fetchSession.tsx;
-
 const fetchSession = async (): Promise<string> => {
   const apiToken = import.meta.env.VITE_API_TOKEN;
+
+  // Проверка наличия токена в localStorage
+  const storedToken = localStorage.getItem('apiToken');
+  if (!storedToken && apiToken) {
+    localStorage.setItem('apiToken', apiToken); // Сохраните токен в localStorage, если его еще нет
+  }
+
+  // Используйте токен из localStorage для запроса
+  const tokenToUse = storedToken || apiToken;
 
   const options: RequestInit = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: `Bearer ${apiToken}`,
+      Authorization: `Bearer ${tokenToUse}`,
     },
   };
 
