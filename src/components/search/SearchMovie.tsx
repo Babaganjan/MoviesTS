@@ -29,7 +29,6 @@ const SearchMovie: React.FC = () => {
   useEffect(() => {
     const fetchGenres = async () => {
       const apiToken = import.meta.env.VITE_API_TOKEN;
-      localStorage.setItem('apiToken', apiToken);
 
       const options: RequestInit = {
         method: 'GET',
